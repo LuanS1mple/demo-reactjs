@@ -1,10 +1,4 @@
 
-import Button from '@mui/material/Button';
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import ThreeDRotation from '@mui/icons-material/ThreeDRotation';
-import HomeIcon from '@mui/icons-material/Home';
-import { pink } from '@mui/material/colors';
-import  Typography  from '@mui/material/Typography';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -15,7 +9,7 @@ import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined'
 import {
   useColorScheme,
 } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { Box, Container } from '@mui/material';
 function ModeSelect() {
   // const [age, setAge] = React.useState('');
   const {mode, setMode} = useColorScheme()
@@ -53,43 +47,41 @@ function ModeSelect() {
     </FormControl>
   );
 }
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
-      }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
-  );
-}
+
 function App() {
 
   return (
     <>
-      <ModeSelect/>
-      <hr/>
-      <ModeToggle/>
-      <hr/>
-      <div>LuanS1mple</div>
-      <Button variant="text">Text</Button>
-      <Button variant="contained">Contained</Button>
-      <Button variant="outlined">Outlined</Button>
-
-      <br/>
-      <AccessAlarmIcon/>
-      <ThreeDRotation/>
-
-      <br/>
-      <HomeIcon />
-      <HomeIcon color="primary" />
-      <HomeIcon color="secondary" />
-      <HomeIcon color="success" />
-      <HomeIcon color="action" />
-      <HomeIcon color="disabled" />
-      <HomeIcon sx={{ color: pink[500] }} />
+      <Container maxWidth={false} disableGutters sx={{
+        height: '100vh'
+      }}>
+        <Box sx={
+          { 
+            backgroundColor:'red',
+            height: (theme) => theme.app_demo.headBarHeight ,
+            display: 'flex',
+            alignItems: 'center'
+          }
+        }>
+          <ModeSelect/>
+        </Box>
+        <Box sx={{
+          backgroundColor:'blue',
+          height:(theme) => theme.app_demo.boardBarHeight,
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          Board bar
+        </Box>
+        <Box sx={{
+          backgroundColor:'green',
+          height:(theme) => `calc(100vh - ${theme.app_demo.headBarHeight} - ${theme.app_demo.boardBarHeight})`,
+          display: 'flex',
+          alignItems: 'center'
+        }}>
+          Content bar
+        </Box>
+      </Container>
     </>
   )
 }
