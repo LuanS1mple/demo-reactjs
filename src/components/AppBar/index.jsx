@@ -1,20 +1,76 @@
-import React from 'react'
-import { Box, Container } from '@mui/material';
-import ModeSelect from '../../components/ModeSelect'
-
+import  React from 'react';
+import ModeSelect from '../ModeSelect'
+import AppsIcon from '@mui/icons-material/Apps'
+import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
+import SvgIcon from '@mui/material/SvgIcon';
+import WorkSpace from './Menus/WorkSpace';
+import Recent from './Menus/Recent';
+import Started from './Menus/Started';
+import Templates from './Menus/Templates';
+import { Box, Container, Typography } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Badge from '@mui/material/Badge';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Tooltip from '@mui/material/Tooltip';
+import Profiles from './Menus/Profiles';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 function AppBar() {
   return (
-     <Box sx={
+     <Box px={2} sx={
           { 
-            backgroundColor:'red',
             height: (theme) => theme.app_demo.headBarHeight ,
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
+            justifyContent: 'space-between'
           }
         }>
-        <ModeSelect/>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 2
+        }}>
+          <AppsIcon sx={{
+            color: 'primary.main'
+          }} />
+          <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0.5
+          }}>
+            <SvgIcon component={TrelloIcon} inheritViewBox/>
+            <Typography variant='span' sx={{fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main'}}>Trello</Typography>
+          </Box>
+          <WorkSpace/>
+          <Recent/>
+          <Started/>
+          <Templates/>
+
+          <Button variant="outlined">Create</Button>
+        </Box>
+
+        <Box sx={{ 
+            height: (theme) => theme.app_demo.headBarHeight ,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 1
+          }}>
+          <TextField  id="outlined-search" label="Search..." type="search" size='small'/>
+          <ModeSelect/>
+          <Tooltip title='Notification'>
+            <Badge color="secondary" variant="dot" sx={{cursor:'pointer'}}>
+              <NotificationsIcon />
+            </Badge>
+          </Tooltip>
+          <Tooltip title='Help'>
+            <Badge color="secondary" variant="dot" sx={{cursor:'pointer'}}>
+              <HelpOutlineIcon />
+            </Badge>
+          </Tooltip>
+          <Profiles/>
+        </Box>
       </Box>
   )
 }
-
 export default AppBar
