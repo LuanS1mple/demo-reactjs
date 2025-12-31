@@ -28,7 +28,7 @@ function Started() {
         onClick={handleClick}
         endIcon= {<ExpandMoreIcon/>}
       >
-        started
+        Started
       </Button>
       <Menu
         id="basic-menu-started"
