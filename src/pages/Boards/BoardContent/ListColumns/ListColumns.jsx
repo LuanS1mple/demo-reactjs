@@ -3,7 +3,7 @@ import Column from './Column/Column'
 import { Box, Button, Container, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 
-function ListColumns() {
+function ListColumns({columns}) {
   
   return (
       <Box sx={{
@@ -14,9 +14,9 @@ function ListColumns() {
         overflowX: 'auto',
         overflowY: 'hidden'
       }}>
-        <Column></Column>
-        <Column></Column>
-        <Column></Column>
+        {columns?.map(column => {
+          return <Column key={column._id} column={column}></Column>
+        })}
         <Box sx={{
           minWidth: '100px',
           maxWidth: '100px',

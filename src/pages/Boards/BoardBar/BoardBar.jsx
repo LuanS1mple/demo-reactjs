@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Button from '@mui/material/Button';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { capitalizeFirstLetter } from '~/ulties/formatters'
 
 const MENU_STYLE = { color: 'primary.main',
                       bgcolor: 'white',
@@ -21,7 +22,7 @@ const MENU_STYLE = { color: 'primary.main',
                         bgcolor: 'primary.50'
                       }
                     }
-function BoardBar() {
+function BoardBar({board}) {
   return (
     <Box sx={{
           width: '100%',
@@ -35,8 +36,8 @@ function BoardBar() {
           borderTop: 'solid 1px #00bf5a'
         }}>
       <Box sx={{display: 'flex',alignItems: 'center',gap: 2}}>
-        <Chip sx={MENU_STYLE} icon={<DashboardIcon />} label="Public workspace" clickable onClick={() => {}} />
-        <Chip sx={MENU_STYLE} icon={<LockOpenIcon />} label="LuanS1mple" clickable onClick={() => {}} />
+        <Chip sx={MENU_STYLE} icon={<DashboardIcon />} label={board?.title} clickable onClick={() => {}} />
+        <Chip sx={MENU_STYLE} icon={<LockOpenIcon />} label={capitalizeFirstLetter(board?.type)} clickable onClick={() => {}} />
         <Chip sx={MENU_STYLE} icon={<DashboardIcon />} label="Public workspace" clickable onClick={() => {}} />
         <Chip sx={MENU_STYLE} icon={<AddToDriveIcon />} label="Add to Drive" clickable onClick={() => {}} />
       </Box>

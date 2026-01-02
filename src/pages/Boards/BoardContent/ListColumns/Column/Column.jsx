@@ -15,8 +15,9 @@ import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
 import { Box, Container, Typography } from '@mui/material';
 import ListCards from './ListCards/ListCards';
-
-function Column() {
+import { mapOrder } from '~/ulties/sorts';
+function Column({column}) {
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds,'_id')
   const COLUMN_HEADER_HEIGHT = '50px';
   const COLUMN_FOOTER_HEIGHT = '50px';
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +44,7 @@ function Column() {
               cursor: 'pointer',
               fontSize: '1rem'
             }}>
-              Column
+              {column?.title}
             </Typography>
             <Box>
               <Tooltip title='select'>
@@ -100,7 +101,7 @@ function Column() {
             </Box>
           </Box>
           
-          <ListCards></ListCards>        
+          <ListCards cards={orderedCards}></ListCards>        
 
           <Box sx={{
             height: COLUMN_FOOTER_HEIGHT,
