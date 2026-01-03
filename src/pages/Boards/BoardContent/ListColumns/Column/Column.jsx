@@ -16,7 +16,20 @@ import DragHandleIcon from '@mui/icons-material/DragHandle';
 import { Box, Container, Typography } from '@mui/material';
 import ListCards from './ListCards/ListCards';
 import { mapOrder } from '~/ulties/sorts';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 function Column({column}) {
+  const {attributes,listeners,setNodeRef,transform,transition} = useSortable({
+    id: column._id,
+    data: {...column}
+  });
+  
+  const dndKitColumnStyles = {
+    // touchAction: 'none',
+    transform: CSS.Translate.toString(transform),
+    transition
+  };
+
   const orderedCards = mapOrder(column?.cards, column?.cardOrderIds,'_id')
   const COLUMN_HEADER_HEIGHT = '50px';
   const COLUMN_FOOTER_HEIGHT = '50px';
@@ -29,9 +42,15 @@ function Column({column}) {
     setAnchorEl(null);
   };
   return (
-    <Box sx={{minWidth: '300px',maxWidth: '300px', bgcolor: (theme) => (theme.palette.mode=== 'dark'? '#34495e' : '#1976d2'), ml: 2, borderRadius: '6px', 
+    <Box 
+      sx={{minWidth: '300px',maxWidth: '300px', bgcolor: (theme) => (theme.palette.mode=== 'dark'? '#34495e' : '#1976d2'), ml: 2, borderRadius: '6px', 
         height: 'fit-content',maxHeight: '700px'
-        }}>
+      }}
+      ref={setNodeRef}
+      style= {dndKitColumnStyles}
+      {...attributes}
+      {...listeners}
+      >
           <Box sx={{
             height: COLUMN_HEADER_HEIGHT,
             p: 2,
